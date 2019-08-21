@@ -37,39 +37,16 @@
  * 
  * 
  */
-#include<iostream>
-#include<vector>
-using namespace std;
 class Solution {
 public:
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
-        int i = 0;
-        int j = 0;
-
-        int m = nums1.size();
-        int n = nums2.size();
-
-        if (m > n) { // to ensure m<=n
-            vector<int> temp = nums1; nums1 = nums2; nums2 = temp;
-            int tmp = m; m = n; n = tmp;
+        if (nums1.size() > nums2.size()) {
+            nums1.swap(nums2);
         }
-
-          //only one number print it directly
-        if (n == 0)
-            return 0.0;
-        if (m == 0) {
-            if (n % 2 != 0)
-                return nums2[n / 2] * 1.0;
-            else {
-                return (nums2[n / 2 - 1] + nums2[n / 2]) / 2.0;
-            }
-
-        }
-
+        int m = nums1.size(), n = nums2.size();
+    
         int odd = (m + n) % 2;
-        
         int imin = 0, imax = m, halfLen = (m + n + 1) / 2;
-
 
         // divided 2 arrays into 4 arrays
         //          left_part          |        right_part
@@ -77,24 +54,25 @@ public:
         // B[0], B[1], ..., B[j-1]  |  B[j], B[j+1], ..., B[n-1]
         // ensure that A[i-1]<B[j] && B[j-1] < A[i]
         // then median= (max(left_part)+min(right_part))/2
+
         while (imin <= imax) {
             int i = (imin + imax) / 2;
             int j = halfLen - i;
-            cout << i << " " << j << endl;
 
             if (i < imax && nums2[j-1] > nums1[i]) {
                 imin = i + 1;
-            } else if (nums1[i-1] > nums2[j]){
+            } else if (i > imin && nums1[i-1] > nums2[j]){
                 imax = i - 1;
             } else {
                 int maxLeft = 0;
                 if (i == 0) {
                     maxLeft = nums2[j-1];
-                }
-                else if (j == 0) { maxLeft = nums1[i-1]; }
-                else {
+                } else if (j == 0) { 
+                    maxLeft = nums1[i-1]; 
+                } else {
                     maxLeft = max(nums1[i-1], nums2[j-1]);
                 }
+
                 if (odd == 1) {
                     return maxLeft;
                 }
@@ -113,14 +91,4 @@ public:
         return 0.0;
     }
 };
-
-int main() {
-    vector<int> a,b ;
-    a.push_back(3);
-    b.push_back(-2);
-    b.push_back(-1);
-
-    Solution s;
-    cout << s.findMedianSortedArrays(a,b) << endl;
-}
 
