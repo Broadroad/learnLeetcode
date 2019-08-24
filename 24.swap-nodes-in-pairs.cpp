@@ -24,11 +24,12 @@ public:
         {
             cur->next = next->next;
             next->next = cur;
-            *pp = next;
-            pp = &(cur->next);
+            *pp = next; // need to make sure that head point to the first node.
+            pp = &(cur->next); // pp move to the next pair
         }
         return head;
         
     }
 };
+
 
