@@ -63,12 +63,14 @@ public:
                         a[1] = nums[j];
                         a[2] = nums[left];
                         a[3] = nums[right];
+                        /*
                         if (result.size() > 0) {
                             int n = result.size();
                             if (a[0] == result[n-1][0] && a[1] == result[n-1][1] && a[2] == result[n-1][2] && a[3] == result[n-1][3]) {
                                 break;
                             }
                         }
+                        */
                         result.push_back(a);
                         
                         while (left < right && nums[left] == a[2]) left++;
