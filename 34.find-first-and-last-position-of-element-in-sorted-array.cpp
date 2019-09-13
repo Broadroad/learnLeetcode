@@ -34,9 +34,11 @@
  * Output: [-1,-1]
  * 
  */
-class Solution {
+class Solution
+{
 public:
-    vector<int> searchRange(vector<int>& nums, int target) {
+    vector<int> searchRange(vector<int> &nums, int target)
+    {
         /*
         vector<int> result(2,-1);
         int n = nums.size();
@@ -88,11 +90,13 @@ public:
         return result;
         */
         int idx1 = std::lower_bound(nums.begin(), nums.end(), target) - nums.begin();
-        int idx2 = std::lower_bound(nums.begin(), nums.end(), target+1)-nums.begin()-1;
-        if (idx1 < nums.size() && nums[idx1] == target) {
+        int idx2 = std::lower_bound(nums.begin(), nums.end(), target + 1) - nums.begin() - 1;
+        if (idx1 < nums.size() && nums[idx1] == target)
+        {
             return {idx1, idx2};
-        } else {
+        }
+        else
+        {
             return {-1, -1};
         }
-};
-
+    };

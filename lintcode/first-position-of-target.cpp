@@ -19,7 +19,7 @@ public:
                 end = mid;
             } else {
                 start = mid;
-            }
+            } 
         }
         
         if (nums[start] == target) {
