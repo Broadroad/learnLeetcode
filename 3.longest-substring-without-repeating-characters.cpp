@@ -52,25 +52,28 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        if (s.size() < 2) {
-            return s.size();
+        int n = s.size();
+        if (n <= 1) {
+            return n;
         }
-
-        vector<int> hash(256, -1);
-    
-        int start = -1, end = 0, result = 0;
-        while (end < s.size()) 
-        {
-            // if start become -1, then the start pointer will move back
-            // it will be wrong.
-            if (hash[s[end]] > start) {
-                start = hash[s[end]];
-            } 
-            hash[s[end]] = end;
-            result = max(result, end - start);
-            end++;
+        int ans = INT_MIN;
+        vector<int> dict(256, 0);
+        for (int i = 0, j = 0; i < n; i++) {
+            while (j < n) {
+                if (dict[s[j]] > 0) {
+                    break;
+                } else {
+                    dict[s[j]]++;
+                    ans = max(ans, j - i + 1);
+                }
+                j++;
+            }
+            dict[s[i]]--;
         }
-        return result;
+        if (ans == INT_MIN) {
+            return 0;
+        }
+        return ans;
     }
 };
 
