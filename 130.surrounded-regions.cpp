@@ -111,3 +111,8 @@ private:
 };
 // @lc code=end
 
+// 删除了一个表里的某一行，导致另一个表的外键在这个表里找不到，怎么办
+// volitale atomic 实现 syncronise 的性能为啥好了
+// cas 一致性hash
+// java classloder有哪几个
+// threadpool 有哪些
